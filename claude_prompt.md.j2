@@ -1,0 +1,20 @@
+# Claude用 現場AI指示テンプレート
+
+プロジェクト名: {{ project_name }}
+
+設計経緯・目的:
+{% for item in design_history %}
+- {{ item.date }}: {{ item.summary }}
+{% endfor %}
+
+現場ルール:
+{% for rule in rules %}
+- {{ rule }}
+{% endfor %}
+
+バグ・注意事項:
+{% for bug in bug_reports %}
+- {{ bug.date }}: {{ bug.problem }}
+{% endfor %}
+
+必ず上記現場ノウハウを反映して作業してください。
