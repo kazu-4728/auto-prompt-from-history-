@@ -30,7 +30,7 @@ jobs:
         run: python prompt_generator.py --ai claude --output claude_prompt.md
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prompts
           path: |
