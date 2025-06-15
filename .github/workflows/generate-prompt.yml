@@ -1,0 +1,38 @@
+name: Generate AI Prompt
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches:
+      - main
+
+jobs:
+  prompt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate Copilot Prompt
+        run: python prompt_generator.py --ai copilot --output copilot_prompt.md
+
+      - name: Generate Claude Prompt
+        run: python prompt_generator.py --ai claude --output claude_prompt.md
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prompts
+          path: |
+            copilot_prompt.md
+            claude_prompt.md
